@@ -1,7 +1,4 @@
-#include<iostream>
-#include<stdio.h>
-#include<mpi.h>
-#include<omp.h>
+#include "Parallel.hpp"
 
 static double c_start, c_diff;
 #define tic() c_start = MPI_Wtime();

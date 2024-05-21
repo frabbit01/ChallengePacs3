@@ -1,6 +1,6 @@
 CXX      ?= g++
 CXXFLAGS ?= -std=c++20
-CPPFLAGS ?= -O3 -Wall -pedantic -I$(PACS_ROOT)/include
+CPPFLAGS ?= -O3 -Wall -pedantic -I$(PACS_ROOT)/include -I$(PACS_ROOT)/src/Matrix
 LDLIBS   ?= 
 LINK.o := $(LINK.cc)
 
