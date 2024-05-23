@@ -1,5 +1,5 @@
 {
     "n": 11,
-    "f": "8*pi*pi*sin(2*pi*x)*sin(2*pi*y)", 
-    "u_ex": "sin(2*pi*x*sin(2*pi*y)"
+    "f": "8*3.14*3.14*sin(2*3.14*x)*sin(2*3.14*y)", 
+    "u_ex": "sin(2*3.14*x*sin(2*3.14*y)"
 }

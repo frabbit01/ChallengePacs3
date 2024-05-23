@@ -1,5 +1,8 @@
 #include "Parallel.hpp"
-
+#include <json.hpp>
+#include<string>
+#include "muparser_fun.hpp"
+#include<fstream>
 static double c_start, c_diff;
 #define tic() c_start = MPI_Wtime();
 #define toc(x)                                       \
@@ -9,13 +12,18 @@ static double c_start, c_diff;
   }
 using RowMatrix=apsc::LinearAlgebra::Matrix<double,apsc::LinearAlgebra::ORDERING::ROWMAJOR>;
 using namespace apsc;
+using json = nlohmann::json;
 int main(int argc, char** argv){
     int provided;
-    
-    int n=11; //modificare: deve leggere da file
+    //I initialize both n and f from a json file, so that the user can modify them as wished.
+    std::ifstream file("data.json");
+    json data = json::parse(file);
+    std::string funString = data.value("f","");
+    std::function<double(double,double)> f=MuparserFun(funString); //Rmk: I need to pass pi correctly!
+    int n=data.value("n",11);
     RowMatrix Global_m(n,n);
     const double h=1/(n-1);
-    std::function<double(double,double)> f; //I need to initialize f
+    
     int global_convergence=0;
     tic();
     MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE, &provided);
@@ -29,7 +37,7 @@ int main(int argc, char** argv){
     int local_convergence;
     //check whether parallelizing this with omp might be a good idea
     for(std::size_t k=0;k<maxit;++k){
-        U_new=parallel_jacobi(U_old,h,f);
+        U_new=parallel_jacobi(U_old,U_new,h,f);
         local_convergence=stop_criterion(U_old,U_new,h);
         MPI_Allreduce(&local_convergence, &global_convergence, 1, MPI_INT, MPI_LAND, MPI_COMM_WORLD); //I check whether the iteration has converged
         if(global_convergence==1) //If every thread converged: break
