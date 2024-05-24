@@ -39,7 +39,7 @@ int main(int argc, char** argv){
     int local_convergence;
     //check whether parallelizing this with omp might be a good idea
     for(std::size_t k=0;k<maxit;++k){
-        U_new=parallel_jacobi(U_old,U_new,h,f,rank);
+        U_new=parallel_jacobi(U_old,U_new,h,f,rank,size);
         local_convergence=stop_criterion(U_old,U_new,h,tol);
         MPI_Allreduce(&local_convergence, &global_convergence, 1, MPI_INT, MPI_LAND, MPI_COMM_WORLD); //I check whether the iteration has converged
         if(global_convergence==1) //If every thread converged: break
