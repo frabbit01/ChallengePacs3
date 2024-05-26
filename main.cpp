@@ -21,11 +21,11 @@ int main(int argc, char** argv){
     json data = json::parse(file);
     std::string funString = data.value("f","");
     //std::function<double(double,double)> f=MuparserFun(funString); //Rmk: I need to pass pi correctly!
-    std::function<double(double,double)> f=[] (double x,double y) {return 8*3.14*3.14*sin(2*3.14*x)*sin(2*3.14*y);};
+    std::function<double(double,double)> f=[] (double x,double y) {return 8*M_PI*M_PI*sin(2*M_PI*x)*sin(2*M_PI*y);};
     int n=data.value("n",11);
     RowMatrix Global_m(n,n);
     const double h=1/(n-1);
-    
+    double tol=1e-9;
     int global_convergence=0;
     tic();
     MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE, &provided);
@@ -38,9 +38,15 @@ int main(int argc, char** argv){
     RowMatrix U_old(local_nrows,n), U_new(local_nrows,n);
     int local_convergence;
     //check whether parallelizing this with omp might be a good idea
-    for(std::size_t k=0;k<maxit;++k){
+    unsigned int maxit=1000;
+    for(std::size_t k=0;k<maxit;++k){ //immediately gets out??? maybe 0 is a solution for this problem??
+        std::cout<<k<<std::endl;
         U_new=parallel_jacobi(U_old,U_new,h,f,rank,size);
+        
         local_convergence=stop_criterion(U_old,U_new,h,tol);
+        // Synchronize all MPI processes
+        MPI_Barrier(MPI_COMM_WORLD);
+        std::cout<<local_convergence<<std::endl;
         MPI_Allreduce(&local_convergence, &global_convergence, 1, MPI_INT, MPI_LAND, MPI_COMM_WORLD); //I check whether the iteration has converged
         if(global_convergence==1) //If every thread converged: break
           break;
