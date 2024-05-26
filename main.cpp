@@ -16,7 +16,7 @@ using namespace apsc;
 using json = nlohmann::json;
 int main(int argc, char** argv){
     int provided;
-    //I initialize both n and f from a json file, so that the user can modify them as wished.
+    //I initialize both n and f from a json file, so that the user can modify them as wished. MUPARSER NOT WORKING!!!
     std::ifstream file("data.json");
     json data = json::parse(file);
     std::string funString = data.value("f","");
@@ -24,10 +24,10 @@ int main(int argc, char** argv){
     std::function<double(double,double)> f=[] (double x,double y) {return 8*M_PI*M_PI*sin(2*M_PI*x)*sin(2*M_PI*y);};
     int n=data.value("n",11);
     RowMatrix Global_m(n,n);
-    const double h=1/(n-1);
-    double tol=1e-9;
+    double h=1/static_cast<double>(n - 1);
+    unsigned iter=0;
+    double tol=1e-7;
     int global_convergence=0;
-    tic();
     MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE, &provided);
 
     int rank, size;
@@ -36,21 +36,42 @@ int main(int argc, char** argv){
     
     int local_nrows = (n % size > rank) ? n/size +1 : n/size; //controlla
     RowMatrix U_old(local_nrows,n), U_new(local_nrows,n);
+    // Initialize U_old with a non-trivial guess
+    // Create a random device and seed the random number generator
+    /*std::random_device rd;
+    std::mt19937 gen(rd());
+
+    // Define the range for the random number
+    std::uniform_real_distribution<> distrib(-10, 10);
+
+    // Generate and print a random number
+    
+    for (std::size_t i = 0; i < local_nrows; ++i) {
+        for (std::size_t j = 0; j < n; ++j) {
+          int random_number = distrib(gen);
+            U_old(i, j) = random_number;
+        }
+    }*/
+
     int local_convergence;
     //check whether parallelizing this with omp might be a good idea
-    unsigned int maxit=1000;
+    unsigned int maxit=10000;
+    tic(); //start counting
+
     for(std::size_t k=0;k<maxit;++k){ //immediately gets out??? maybe 0 is a solution for this problem??
-        std::cout<<k<<std::endl;
+        
         U_new=parallel_jacobi(U_old,U_new,h,f,rank,size);
         
         local_convergence=stop_criterion(U_old,U_new,h,tol);
         // Synchronize all MPI processes
         MPI_Barrier(MPI_COMM_WORLD);
-        std::cout<<local_convergence<<std::endl;
         MPI_Allreduce(&local_convergence, &global_convergence, 1, MPI_INT, MPI_LAND, MPI_COMM_WORLD); //I check whether the iteration has converged
-        if(global_convergence==1) //If every thread converged: break
-          break;
+        if(global_convergence==1){
+          iter=k;
+           //If every thread converged: break
+          break;}
         U_old=U_new; //update U_old
+        //MPI_Barrier(MPI_COMM_WORLD);
     }
     int* recvcounts = new int[size];
     int* displs = new int[size];
@@ -67,14 +88,18 @@ int main(int argc, char** argv){
     MPI_Gatherv(U_new.data(), local_nrows * n, MPI_DOUBLE,
                 Global_m.data(), recvcounts, displs, MPI_DOUBLE,
                 0, MPI_COMM_WORLD);
-    std::cout<<U_new<<std::endl;
+    //std::cout<<U_new<<std::endl;
     MPI_Finalize();
     
     if(global_convergence==1&&rank==0)
-      std::cout<<"The method has converged in less than "<<maxit<<" iterations"<<std::endl;
+      std::cout<<"The method has converged in "<<iter<<" iterations"<<std::endl;
+    if(global_convergence==0&&rank==0)
+      std::cout<<"The method has not converged in less than "<<maxit<<"iterations"<<std::endl;
     if(rank==0){
       std::cout<<"The resulting matrix is:"<<std::endl;
       std::cout<<Global_m<<std::endl;
     }
+
+    
     return 0;
 }

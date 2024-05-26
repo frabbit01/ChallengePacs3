@@ -13,10 +13,9 @@ namespace apsc{
                 e+=(U_new(i,j)-U_old(i,j))*(U_new(i,j)-U_old(i,j));
             }
         }
-        
+       
         e=sqrt(e*h);
         return (e < tol) ? 1 : 0;
-        return 0;
 
     }
 
