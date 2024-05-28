@@ -2,7 +2,7 @@ CXX      = mpic++
 CXXFLAGS ?= -std=c++20
 CPPFLAGS ?= -fopenmp -O3 -Wall -pedantic -I$(PACS_ROOT)/include -I$(PACS_ROOT)/src/Parallel/MPI/Matrix
 LDFLAGS ?= -L$(PACS_ROOT)/lib
-LIBS  ?= -lmpi #-lmuparser 
+LIBS  ?= -lmpi -lmuparser 
 LINK.o := $(LINK.cc)
 
 EXEC = main

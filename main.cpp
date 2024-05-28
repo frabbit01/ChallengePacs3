@@ -2,7 +2,7 @@
 #include <json.hpp>
 //#include <muParser.h>
 #include<string>
-//#include "muparser_fun.hpp"
+#include "muparser_fun.hpp"
 #include<fstream>
 static double c_start, c_diff;
 #define tic() c_start = MPI_Wtime();
@@ -20,6 +20,7 @@ int main(int argc, char** argv){
     std::ifstream file("data.json");
     json data = json::parse(file);
     std::string funString = data.value("f","");
+    std::cout<<funString<<std::endl;
     //std::function<double(double,double)> f=MuparserFun(funString); //Rmk: I need to pass pi correctly!
     std::function<double(double,double)> f=[] (double x,double y) {return 8*M_PI*M_PI*sin(2*M_PI*x)*sin(2*M_PI*y);};
     int n=data.value("n",11);
