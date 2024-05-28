@@ -21,8 +21,8 @@ int main(int argc, char** argv){
     json data = json::parse(file);
     std::string funString = data.value("f","");
     std::cout<<funString<<std::endl;
-    //std::function<double(double,double)> f=MuparserFun(funString); //Rmk: I need to pass pi correctly!
-    std::function<double(double,double)> f=[] (double x,double y) {return 8*M_PI*M_PI*sin(2*M_PI*x)*sin(2*M_PI*y);};
+    std::function<double(double,double)> f=createMuParserFunction(funString);
+    
     int n=data.value("n",11);
     RowMatrix Global_m(n,n);
     double h=1/static_cast<double>(n - 1);
