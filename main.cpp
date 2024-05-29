@@ -20,7 +20,7 @@ int main(int argc, char** argv){
     std::ifstream file("data.json");
     json data = json::parse(file);
     std::string funString = data.value("f","");
-    std::cout<<funString<<std::endl;
+    //std::cout<<funString<<std::endl;
     std::function<double(double,double)> f=createMuParserFunction(funString);
     
     int n=data.value("n",11);
@@ -101,7 +101,7 @@ int main(int argc, char** argv){
       std::cout<<Global_m<<std::endl;
     }
 
-    generateVTKFile("mesh/out.vtk", Global_m, n,n, h, h); //controlla se va data matrice con funzione esatta
+    generateVTKFile("mesh/approximated_laplacian.vtk", Global_m, n,n, h, h); //controlla se va data matrice con funzione esatta
 
     
     return 0;
