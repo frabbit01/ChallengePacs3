@@ -24,7 +24,6 @@ namespace apsc{
         auto local_cols=U_old.cols();
         RowMatrix top_row(1,local_cols);
         RowMatrix bottom_row(1,local_cols);
-        int last_row = (rank == size - 1) ? 1 : 0;
         int tag = 0;
         #pragma omp parallel for
         for(std::size_t j=0;j<local_cols;++j){

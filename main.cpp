@@ -20,11 +20,13 @@ int main(int argc, char** argv){
     std::ifstream file("data.json");
     json data = json::parse(file);
     std::string funString = data.value("f","");
+    std::string funString2 = data.value("u_ex","");
     //std::cout<<funString<<std::endl;
     std::function<double(double,double)> f=createMuParserFunction(funString);
+    std::function<double(double,double)> u_ex=createMuParserFunction(funString);
     
     int n=data.value("n",11);
-    RowMatrix Global_m(n,n);
+    RowMatrix Global_m(n,n),exact_m(n,n);
     double h=1/static_cast<double>(n - 1);
     unsigned iter=0;
     double tol=1e-7;
@@ -99,10 +101,15 @@ int main(int argc, char** argv){
     if(rank==0){
       std::cout<<"The resulting matrix is:"<<std::endl;
       std::cout<<Global_m<<std::endl;
-    }
-
-    generateVTKFile("mesh/approximated_laplacian.vtk", Global_m, n,n, h, h); //controlla se va data matrice con funzione esatta
-
     
+    for(std::size_t i=1;i<n-1;++i){
+      for(std::size_t j=1;j<n-1;++j){
+        exact_m(i,j)=u_ex(i*h,j*h);
+      }
+    }
+    std::cout<<"exact matrix"<<exact_m<<std::endl;
+    generateVTKFile("mesh/approximated_laplacian.vtk", Global_m, n-1,n-1, h, h); //controlla se va data matrice con funzione esatta
+    generateVTKFile("mesh/exact_laplacian.vtk", exact_m, n-1,n-1, h, h); 
+    }
     return 0;
 }
