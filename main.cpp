@@ -1,6 +1,6 @@
 #include "Parallel.hpp"
 #include <json.hpp>
-//#include <muParser.h>
+#include "writeVTK.hpp"
 #include<string>
 #include "muparser_fun.hpp"
 #include<fstream>
@@ -100,6 +100,8 @@ int main(int argc, char** argv){
       std::cout<<"The resulting matrix is:"<<std::endl;
       std::cout<<Global_m<<std::endl;
     }
+
+    generateVTKFile("mesh/out.vtk", Global_m, n,n, h, h); //controlla se va data matrice con funzione esatta
 
     
     return 0;
