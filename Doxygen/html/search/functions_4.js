@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['stop_5fcriterion_18',['stop_criterion',['../Parallel_8cpp.html#aade9969203e8fe52eccaeea848acfac2',1,'apsc']]]
+  ['parallel_5fjacobi_21',['parallel_jacobi',['../Parallel_8cpp.html#a615bd078f2dca2fb74767c3f6dcd5c7b',1,'apsc']]]
 ];

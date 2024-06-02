@@ -2,7 +2,7 @@ var indexSectionsWithContent =
 {
   0: "cdglmpsw",
   1: "mpw",
-  2: "dglps",
+  2: "cdglps",
   3: "c"
 };
 

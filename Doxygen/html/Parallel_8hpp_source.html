@@ -74,7 +74,7 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include&lt;Matrix.hpp&gt;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include&lt;functional&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;json.hpp&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;muparser_fun.hpp&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="muparser__fun_8hpp.html">muparser_fun.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include&lt;fstream&gt;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>apsc{</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">using</span> RowMatrix=apsc::LinearAlgebra::Matrix&lt;double,apsc::LinearAlgebra::ORDERING::ROWMAJOR&gt;; <span class="comment">//I only want to split by row</span></div>
@@ -87,6 +87,7 @@ $(function() {
 <div class="ttc" id="aParallel_8cpp_html_a31a536f755a8c19a6d3a670fe86e2d56"><div class="ttname"><a href="Parallel_8cpp.html#a31a536f755a8c19a6d3a670fe86e2d56">apsc::Dirichlet_boundary_conditions</a></div><div class="ttdeci">RowMatrix &amp; Dirichlet_boundary_conditions(RowMatrix &amp;M, double &amp;h)</div><div class="ttdoc">Fills in a matrix with four different boundary conditions taken from a json file. (1 sx,...</div><div class="ttdef"><b>Definition:</b> Parallel.cpp:130</div></div>
 <div class="ttc" id="aParallel_8cpp_html_a615bd078f2dca2fb74767c3f6dcd5c7b"><div class="ttname"><a href="Parallel_8cpp.html#a615bd078f2dca2fb74767c3f6dcd5c7b">apsc::parallel_jacobi</a></div><div class="ttdeci">RowMatrix &amp; parallel_jacobi(RowMatrix const &amp;U_old, RowMatrix &amp;U_new, const double &amp;h, std::function&lt; double(double, double)&gt; const &amp;f, const int &amp;rank, const int &amp;size)</div><div class="ttdoc">Computes one Jacobi parallel iteration.</div><div class="ttdef"><b>Definition:</b> Parallel.cpp:51</div></div>
 <div class="ttc" id="aParallel_8cpp_html_aade9969203e8fe52eccaeea848acfac2"><div class="ttname"><a href="Parallel_8cpp.html#aade9969203e8fe52eccaeea848acfac2">apsc::stop_criterion</a></div><div class="ttdeci">int stop_criterion(RowMatrix &amp;U_old, RowMatrix &amp;U_new, const double &amp;h, const double &amp;tol)</div><div class="ttdoc">Local stop criterion.</div><div class="ttdef"><b>Definition:</b> Parallel.cpp:25</div></div>
+<div class="ttc" id="amuparser__fun_8hpp_html"><div class="ttname"><a href="muparser__fun_8hpp.html">muparser_fun.hpp</a></div><div class="ttdoc">Definition of an auxiliary function that uses muParser in order to create a function wrapper from a s...</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
