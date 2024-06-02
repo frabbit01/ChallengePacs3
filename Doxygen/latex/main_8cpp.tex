@@ -1,0 +1,76 @@
+\hypertarget{main_8cpp}{}\doxysection{main.\+cpp File Reference}
+\label{main_8cpp}\index{main.cpp@{main.cpp}}
+
+
+main file that performs several iterations of the Jacobi method in a parallel way and writes a VTK file from the obtained results. The forcing term,exact solution, number of nodes (equal for both x and y directions) and boundary conditions are given by the user in a json file.  
+
+
+{\ttfamily \#include \char`\"{}Parallel.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}write\+VTK.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include \char`\"{}muparser\+\_\+fun.\+hpp\char`\"{}}\newline
+Include dependency graph for main.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8cpp_add29229f85a32e4c930b122d7c7f00ab}\label{main_8cpp_add29229f85a32e4c930b122d7c7f00ab}} 
+\#define {\bfseries tic}()~c\+\_\+start = MPI\+\_\+\+Wtime();
+\item 
+\#define {\bfseries toc}(x)
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8cpp_ab6623781f13dee2472158fc9ae6b26fd}\label{main_8cpp_ab6623781f13dee2472158fc9ae6b26fd}} 
+using {\bfseries Row\+Matrix} = apsc\+::\+Linear\+Algebra\+::\+Matrix$<$ double, apsc\+::\+Linear\+Algebra\+::\+ORDERING\+::\+ROWMAJOR $>$
+\item 
+\mbox{\Hypertarget{main_8cpp_ab701e3ac61a85b337ec5c1abaad6742d}\label{main_8cpp_ab701e3ac61a85b337ec5c1abaad6742d}} 
+using {\bfseries json} = nlohmann\+::json
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+main file that performs several iterations of the Jacobi method in a parallel way and writes a VTK file from the obtained results. The forcing term,exact solution, number of nodes (equal for both x and y directions) and boundary conditions are given by the user in a json file. 
+
+\begin{DoxyAuthor}{Author}
+Francesca Visalli 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/06-\/02
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2024 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{main_8cpp_a8f182e34bbf31217246cbdcc16ccfcb3}\label{main_8cpp_a8f182e34bbf31217246cbdcc16ccfcb3}} 
+\index{main.cpp@{main.cpp}!toc@{toc}}
+\index{toc@{toc}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{toc}{toc}}
+{\footnotesize\ttfamily \#define toc(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \{                                                  \(\backslash\)}
+\DoxyCodeLine{    c\_diff = MPI\_Wtime() -\/ c\_start;                  \(\backslash\)}
+\DoxyCodeLine{    std::cout << x << c\_diff << \textcolor{stringliteral}{"{} [s]"{}} << std::endl; \(\backslash\)}
+\DoxyCodeLine{  \}}
+
+\end{DoxyCode}

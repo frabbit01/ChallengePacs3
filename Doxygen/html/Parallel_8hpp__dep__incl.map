@@ -1,0 +1,5 @@
+<map id="Parallel.hpp" name="Parallel.hpp">
+<area shape="rect" id="node1" title="Declaration of auxiliary functions for the Jacobi parallel method." alt="" coords="55,5,153,32"/>
+<area shape="rect" id="node2" href="$main_8cpp.html" title="main file that performs several iterations of the Jacobi method in a parallel way and writes a VTK fi..." alt="" coords="5,80,88,107"/>
+<area shape="rect" id="node3" href="$Parallel_8cpp.html" title="Definition of the functions in Parallel.hpp." alt="" coords="113,80,210,107"/>
+</map>

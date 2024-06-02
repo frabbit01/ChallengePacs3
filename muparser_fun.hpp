@@ -1,3 +1,6 @@
+#ifndef MUPARSER_FUN_HPP
+#define MUPARSER_FUN_HPP
+
 #include <muParser.h>
 #include <cmath>
 #include <memory>
@@ -5,7 +8,7 @@
 
 
 
-std::function<double(double, double)> createMuParserFunction(const std::string& expression) {
+inline std::function<double(double, double)> createMuParserFunction(const std::string& expression) {
     return [expression](double x, double y) {
         try {
             mu::Parser p;
@@ -20,3 +23,5 @@ std::function<double(double, double)> createMuParserFunction(const std::string& 
         }
     };
 }
+
+#endif // MUPARSER_FUN_HPP

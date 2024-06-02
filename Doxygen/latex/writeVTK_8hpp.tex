@@ -1,0 +1,78 @@
+\hypertarget{writeVTK_8hpp}{}\doxysection{write\+VTK.\+hpp File Reference}
+\label{writeVTK_8hpp}\index{writeVTK.hpp@{writeVTK.hpp}}
+
+
+Modified function to generate a file VTK in order to accept the Matrix type.  
+
+
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$Matrix.\+hpp$>$}\newline
+Include dependency graph for write\+VTK.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{writeVTK_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=162pt]{writeVTK_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{writeVTK_8hpp_ab6623781f13dee2472158fc9ae6b26fd}\label{writeVTK_8hpp_ab6623781f13dee2472158fc9ae6b26fd}} 
+using {\bfseries Row\+Matrix} = apsc\+::\+Linear\+Algebra\+::\+Matrix$<$ double, apsc\+::\+Linear\+Algebra\+::\+ORDERING\+::\+ROWMAJOR $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{writeVTK_8hpp_ad54d3a2a007838074fad979b72b085fb}{generate\+VTKFile}} (const std\+::string \&filename, const Row\+Matrix \&scalar\+Field, int nx, int ny, double hx, double hy)
+\begin{DoxyCompactList}\small\item\em Function that generates a STRUCTURED VTK file with a scalar field. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Modified function to generate a file VTK in order to accept the Matrix type. 
+
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/06-\/02
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2024 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{writeVTK_8hpp_ad54d3a2a007838074fad979b72b085fb}\label{writeVTK_8hpp_ad54d3a2a007838074fad979b72b085fb}} 
+\index{writeVTK.hpp@{writeVTK.hpp}!generateVTKFile@{generateVTKFile}}
+\index{generateVTKFile@{generateVTKFile}!writeVTK.hpp@{writeVTK.hpp}}
+\doxysubsubsection{\texorpdfstring{generateVTKFile()}{generateVTKFile()}}
+{\footnotesize\ttfamily void generate\+VTKFile (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename,  }\item[{const Row\+Matrix \&}]{scalar\+Field,  }\item[{int}]{nx,  }\item[{int}]{ny,  }\item[{double}]{hx,  }\item[{double}]{hy }\end{DoxyParamCaption})}
+
+
+
+Function that generates a STRUCTURED VTK file with a scalar field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The name of the file that will be generated (if not already existing) or overwritten \\
+\hline
+{\em scalar\+Field} & The matrix from which the file will import the data \\
+\hline
+{\em nx} & Biggest row index \\
+\hline
+{\em ny} & Biggest column index \\
+\hline
+{\em hx} & Mesh spacing (on the x-\/axis) assuming a uniform grid \\
+\hline
+{\em hy} & Mesh spacing (on the y-\/axis) assuming a uniform grid \\
+\hline
+\end{DoxyParams}

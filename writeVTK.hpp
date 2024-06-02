@@ -1,3 +1,13 @@
+/**
+ * @file writeVTK.hpp
+ * 
+ * @brief Modified function to generate a file VTK in order to accept the Matrix type
+ * @version 0.1
+ * @date 2024-06-02
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef WRITEVTK_HPP
 #define WRITEVTK_HPP
 
@@ -5,9 +15,19 @@
 #include <string>
 #include <fstream>
 #include<Matrix.hpp>
+
 using namespace apsc;
 using RowMatrix=apsc::LinearAlgebra::Matrix<double,apsc::LinearAlgebra::ORDERING::ROWMAJOR>;
-// generates a STRUCTURES VTK file with a scalar field
+/**
+ * @brief Function that generates a STRUCTURED VTK file with a scalar field
+ * 
+ * @param filename The name of the file that will be generated (if not already existing) or overwritten
+ * @param scalarField The matrix from which the file will import the data
+ * @param nx Biggest row index
+ * @param ny Biggest column index
+ * @param hx Mesh spacing (on the x-axis) assuming a uniform grid
+ * @param hy Mesh spacing (on the y-axis) assuming a uniform grid
+ */
 void generateVTKFile(const std::string & filename, 
                      const RowMatrix & scalarField, 
                      int nx, int ny, double hx, double hy) {

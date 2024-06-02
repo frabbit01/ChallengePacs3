@@ -1,0 +1,160 @@
+\hypertarget{Parallel_8hpp}{}\doxysection{Parallel.\+hpp File Reference}
+\label{Parallel_8hpp}\index{Parallel.hpp@{Parallel.hpp}}
+
+
+Declaration of auxiliary functions for the Jacobi parallel method.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$mpi.\+h$>$}\newline
+{\ttfamily \#include $<$omp.\+h$>$}\newline
+{\ttfamily \#include $<$Matrix.\+hpp$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$json.\+hpp$>$}\newline
+{\ttfamily \#include \char`\"{}muparser\+\_\+fun.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+Include dependency graph for Parallel.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Parallel_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{Parallel_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{Parallel_8cpp_aade9969203e8fe52eccaeea848acfac2}{apsc\+::stop\+\_\+criterion}} (Row\+Matrix \&U\+\_\+old, Row\+Matrix \&U\+\_\+new, const double \&h, const double \&tol)
+\begin{DoxyCompactList}\small\item\em Local stop criterion. \end{DoxyCompactList}\item 
+Row\+Matrix \& \mbox{\hyperlink{Parallel_8cpp_a615bd078f2dca2fb74767c3f6dcd5c7b}{apsc\+::parallel\+\_\+jacobi}} (Row\+Matrix const \&U\+\_\+old, Row\+Matrix \&U\+\_\+new, const double \&h, std\+::function$<$ double(double, double)$>$ const \&f, const int \&rank, const int \&size)
+\begin{DoxyCompactList}\small\item\em Computes one Jacobi parallel iteration. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{Parallel_8cpp_a177985ea702e10a0c5e193e98c04090c}{apsc\+::\+L2\+\_\+error}} (Row\+Matrix \&Global\+\_\+m, Row\+Matrix \&exact\+\_\+m, double \&h, int \&n, std\+::function$<$ double(double, double)$>$ \&u\+\_\+ex)
+\begin{DoxyCompactList}\small\item\em Function that computes the L2 error and fills in the matrix corresponding to the exact solution. \end{DoxyCompactList}\item 
+Row\+Matrix \& \mbox{\hyperlink{Parallel_8cpp_a31a536f755a8c19a6d3a670fe86e2d56}{apsc\+::\+Dirichlet\+\_\+boundary\+\_\+conditions}} (Row\+Matrix \&M, double \&h)
+\begin{DoxyCompactList}\small\item\em Fills in a matrix with four different boundary conditions taken from a json file. (1 sx, 2 up, 3 dx, 4 down) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Declaration of auxiliary functions for the Jacobi parallel method. 
+
+\begin{DoxyAuthor}{Author}
+Francesca Visalli 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/06-\/02
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2024 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{Parallel_8cpp_a31a536f755a8c19a6d3a670fe86e2d56}\label{Parallel_8cpp_a31a536f755a8c19a6d3a670fe86e2d56}} 
+\index{Parallel.hpp@{Parallel.hpp}!Dirichlet\_boundary\_conditions@{Dirichlet\_boundary\_conditions}}
+\index{Dirichlet\_boundary\_conditions@{Dirichlet\_boundary\_conditions}!Parallel.hpp@{Parallel.hpp}}
+\doxysubsubsection{\texorpdfstring{Dirichlet\_boundary\_conditions()}{Dirichlet\_boundary\_conditions()}}
+{\footnotesize\ttfamily Row\+Matrix \& apsc\+::\+Dirichlet\+\_\+boundary\+\_\+conditions (\begin{DoxyParamCaption}\item[{Row\+Matrix \&}]{M,  }\item[{double \&}]{h }\end{DoxyParamCaption})}
+
+
+
+Fills in a matrix with four different boundary conditions taken from a json file. (1 sx, 2 up, 3 dx, 4 down) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em M} & Matrix to be filled \\
+\hline
+{\em h} & Mesh spacing (assuming a uniform mesh) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Row\+Matrix\& M 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Parallel_8cpp_a177985ea702e10a0c5e193e98c04090c}\label{Parallel_8cpp_a177985ea702e10a0c5e193e98c04090c}} 
+\index{Parallel.hpp@{Parallel.hpp}!L2\_error@{L2\_error}}
+\index{L2\_error@{L2\_error}!Parallel.hpp@{Parallel.hpp}}
+\doxysubsubsection{\texorpdfstring{L2\_error()}{L2\_error()}}
+{\footnotesize\ttfamily double apsc\+::\+L2\+\_\+error (\begin{DoxyParamCaption}\item[{Row\+Matrix \&}]{Global\+\_\+m,  }\item[{Row\+Matrix \&}]{exact\+\_\+m,  }\item[{double \&}]{h,  }\item[{int \&}]{n,  }\item[{std\+::function$<$ double(double, double)$>$ \&}]{u\+\_\+ex }\end{DoxyParamCaption})}
+
+
+
+Function that computes the L2 error and fills in the matrix corresponding to the exact solution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Global\+\_\+m} & Matrix orresponding to the approximated solution \\
+\hline
+{\em exact\+\_\+m} & Matrix corresponding to the exact solution \\
+\hline
+{\em h} & Mesh spacing (assuming uniform mesh along x and y axes) \\
+\hline
+{\em n} & Number of points (along one of the two axes) \\
+\hline
+{\em u\+\_\+ex} & Exact solution \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Parallel_8cpp_a615bd078f2dca2fb74767c3f6dcd5c7b}\label{Parallel_8cpp_a615bd078f2dca2fb74767c3f6dcd5c7b}} 
+\index{Parallel.hpp@{Parallel.hpp}!parallel\_jacobi@{parallel\_jacobi}}
+\index{parallel\_jacobi@{parallel\_jacobi}!Parallel.hpp@{Parallel.hpp}}
+\doxysubsubsection{\texorpdfstring{parallel\_jacobi()}{parallel\_jacobi()}}
+{\footnotesize\ttfamily Row\+Matrix \& apsc\+::parallel\+\_\+jacobi (\begin{DoxyParamCaption}\item[{Row\+Matrix const \&}]{U\+\_\+old,  }\item[{Row\+Matrix \&}]{U\+\_\+new,  }\item[{const double \&}]{h,  }\item[{std\+::function$<$ double(double, double)$>$ const \&}]{f,  }\item[{const int \&}]{rank,  }\item[{const int \&}]{size }\end{DoxyParamCaption})}
+
+
+
+Computes one Jacobi parallel iteration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em U\+\_\+old} & Matrix computed in the previous iteration \\
+\hline
+{\em U\+\_\+new} & Matrix computed in the current iteration \\
+\hline
+{\em h} & Mesh spacing (assuming uniform mesh along x and y axes) \\
+\hline
+{\em f} & Forcing term \\
+\hline
+{\em rank} & Rank number \\
+\hline
+{\em size} & Number of ranks \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Row\+Matrix\& U\+\_\+new 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Parallel_8cpp_aade9969203e8fe52eccaeea848acfac2}\label{Parallel_8cpp_aade9969203e8fe52eccaeea848acfac2}} 
+\index{Parallel.hpp@{Parallel.hpp}!stop\_criterion@{stop\_criterion}}
+\index{stop\_criterion@{stop\_criterion}!Parallel.hpp@{Parallel.hpp}}
+\doxysubsubsection{\texorpdfstring{stop\_criterion()}{stop\_criterion()}}
+{\footnotesize\ttfamily int apsc\+::stop\+\_\+criterion (\begin{DoxyParamCaption}\item[{Row\+Matrix \&}]{U\+\_\+old,  }\item[{Row\+Matrix \&}]{U\+\_\+new,  }\item[{const double \&}]{h,  }\item[{const double \&}]{tol }\end{DoxyParamCaption})}
+
+
+
+Local stop criterion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em U\+\_\+old} & Matrix computed in the previous iteration \\
+\hline
+{\em U\+\_\+new} & Matrix computed in the current iteration \\
+\hline
+{\em h} & Mesh spacing (assuming uniform mesh along x and y axes) \\
+\hline
+{\em tol} & Tolerance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 1 if the method has locally converged, 0 otherwise 
+\end{DoxyReturn}

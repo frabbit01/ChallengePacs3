@@ -24,7 +24,9 @@ $(EXEC): $(OBJS)
 clean:
 	$(RM) $(DEPEND)
 	$(RM) *.o
-
+doc:
+	doxygen $(DOXYFILE)
+	
 distclean: clean
 	$(RM) $(EXEC)
 	$(RM) *.csv *.out *.bak *~
