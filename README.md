@@ -10,16 +10,24 @@ Here I report the main contents of the project files.
 
 data.json: File that is read to initialize the forcing term, the exact solution, the number of points on each dimension of the matrix and
             Dirichlet boundary conditions (1 sx, 2 up, 3 dx, 4 down).
+            
 main.cpp: Implementation of the parallel jacobi method 
+
 Parallel.hpp: Declaration of auxiliary functions called in the main file:
+
             - a local stop criterion
+            
             - one parallel Jacobi iteration
+            
             - L2 error
+            
             - a function that imposes boundary condition on a matrix
-Parallel.cpp: Definition of these funcions
--muparser_fun.hpp: File that contains a method that translates a string into a function
--writeVTK: File that contains methods to translate a matrix into a VTK file.
+Parallel.cpp: Definition of these functions
+
+muparser_fun.hpp: File that contains a method that translates a string into a function
+
+writeVTK: File that contains methods to translate a matrix into a VTK file.
         (it was modified from the approach seen in the laboratories in order to accept Matrix objects)
 
--Doxyfile: File that contains indications to generate documentation correctly (used in the makefile, make doc).
+Doxyfile: File that contains indications to generate documentation correctly (used in the makefile, make doc).
 The Doxygen folder contains the documentation.
