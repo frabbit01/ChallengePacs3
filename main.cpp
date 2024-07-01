@@ -101,10 +101,10 @@ int main(int argc, char** argv){
       
       error=L2_error(Global_m,exact_m,h,n,u_ex);
       std::cout<<"with a L2 error of "<<error<<std::endl;
-      std::cout<<"The resulting matrix is:"<<std::endl;
-      std::cout<<Global_m<<std::endl;
+      //std::cout<<"The resulting matrix is:"<<std::endl;
+      //std::cout<<Global_m<<std::endl;
     
-      std::cout<<"exact matrix"<<exact_m<<std::endl;
+      //std::cout<<"exact matrix"<<exact_m<<std::endl;
 
       //Generate VTKFile for both exact and approximated solutions
       generateVTKFile("mesh/approximated_laplacian.vtk", Global_m, n-1,n-1, h, h); 
