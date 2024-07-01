@@ -1,0 +1,3 @@
+The code does not scale correctly and no scalability nor convergence
+tests are provided. You should be able to set the tolerance and the maximum number of iteration from the json file.
+On my PC the code is incredibly slow. I have no time to do amn in depth analysisbut there is something wrong in the MPI implementation.
